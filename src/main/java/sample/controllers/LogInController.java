@@ -32,7 +32,7 @@ public class LogInController {
         if (logInService.register(user)) {
 
             if ((Context.getInstance().getUser().getEmail()).equals("admin@mail")) {
-                Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("../../../resources/view/AdminShopWindow.fxml"));
+                Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("view/AdminShopWindow.fxml"));
                 Scene scene = new Scene(parent);
                 Stage nextStage = ( Stage ) (( Node ) actionEvent.getSource()).getScene().getWindow();
                 nextStage.setScene(scene);
@@ -40,7 +40,7 @@ public class LogInController {
                 nextStage.show();
 
             } else {
-                Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("../../../resources/view/ShopWindow.fxml"));
+                Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("view/ShopWindow.fxml"));
                 Scene scene = new Scene(parent);
                 Stage nextStage = ( Stage ) (( Node ) actionEvent.getSource()).getScene().getWindow();
                 nextStage.setScene(scene);
@@ -51,7 +51,7 @@ public class LogInController {
     }
 
     public void switchWindow(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("../../../resources/view/SignUp.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("view/SignUp.fxml"));
         Scene scene = new Scene(parent);
         Stage nextStage = ( Stage ) (( Node ) actionEvent.getSource()).getScene().getWindow();
         nextStage.setScene(scene);

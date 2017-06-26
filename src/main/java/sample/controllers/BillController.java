@@ -41,7 +41,7 @@ public class BillController {
     }
 
     public void backToWindowShop(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("../../../resources/view/ShopWindow.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("view/ShopWindow.fxml"));
         Scene scene = new Scene(parent);
         Stage nextStage = ( Stage ) (( Node ) actionEvent.getSource()).getScene().getWindow();
         nextStage.setScene(scene);

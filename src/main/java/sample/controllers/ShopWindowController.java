@@ -103,7 +103,7 @@ public class ShopWindowController {
         if (buyProdService.buyProd(bill)){
             BillService billService = new BillService();
             Context.getInstance().setChek(billService.setBillList(bill));
-            Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("../../../resources/view/Bill.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("view/Bill.fxml"));
             Scene scene = new Scene(parent);
             Stage nextStage = ( Stage ) (( Node ) actionEvent.getSource()).getScene().getWindow();
             nextStage.setScene(scene);

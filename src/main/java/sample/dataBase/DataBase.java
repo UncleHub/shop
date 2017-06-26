@@ -9,8 +9,8 @@ import java.sql.*;
 
 public class DataBase {
 
-    static Connection connection;
-    static Statement statement;
+    static Connection connection = null;
+    static Statement statement = null;
 
     public static void createConnection() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
