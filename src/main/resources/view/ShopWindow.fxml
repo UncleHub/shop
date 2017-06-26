@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory?>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.ShopWindowController">
+   <children>
+      <TableView fx:id="tblProduct" layoutX="234.0" layoutY="159.0" prefHeight="480.0" prefWidth="530.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="60.0">
+        <columns>
+          <TableColumn fx:id="clmProdId" prefWidth="42.0" text="№" />
+          <TableColumn fx:id="clmProdName" prefWidth="177.0" text="Name" />
+            <TableColumn fx:id="clmProdDesc" prefWidth="241.0" text="Description" />
+            <TableColumn fx:id="clmProdPrice" prefWidth="69.0" text="Price" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnAddProd" defaultButton="true" layoutX="595.0" layoutY="341.0" mnemonicParsing="false" onAction="#addProdToBasket" text="Add product to basket" AnchorPane.bottomAnchor="220.0" AnchorPane.rightAnchor="25.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnExit" cancelButton="true" layoutX="650.0" layoutY="537.0" mnemonicParsing="false" onAction="#closeWindow" text="Exit" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="103.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+
+      <Spinner fx:id="spinner" layoutX="690.0" layoutY="387.0" prefHeight="39.0" prefWidth="78.0" editable="true" >
+      <valueFactory>
+         <SpinnerValueFactory.DoubleSpinnerValueFactory min="0.0" max="10000.0" initialValue="1" amountToStepBy="0.1"/>
+      </valueFactory>
+      </Spinner>
+      <Label layoutX="600.0" layoutY="396.0" text="quantity" AnchorPane.bottomAnchor="179.0" AnchorPane.rightAnchor="141.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnBuyProd" cancelButton="true" layoutX="599.0" layoutY="452.0" mnemonicParsing="false" onAction="#buyProd" text="Buy selected prod" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="52.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Label fx:id="lblTotal" layoutX="600.0" layoutY="300.0" prefHeight="27.0" prefWidth="170.0" text="Total" AnchorPane.bottomAnchor="273.0" AnchorPane.rightAnchor="30.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblBasket" layoutX="620.0" layoutY="60.0" prefHeight="222.0" prefWidth="160.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="60.0">
+        <columns>
+          <TableColumn fx:id="clmBskProd" prefWidth="88.0" text="Product" />
+          <TableColumn fx:id="clmBskQuan" prefWidth="81.0" text="Quantity" />
+        </columns>
+      </TableView>
+      <Label fx:id="lblHello" layoutX="30.0" layoutY="22.0" text="Hello USERNAME" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="660.0" layoutY="22.0" text="Basket" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="22.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnRemoveProdFromBasket" defaultButton="true" layoutX="595.0" layoutY="433.0" mnemonicParsing="false" onAction="#removeProdFromBasket" text="remove product from basket" AnchorPane.bottomAnchor="130.0" AnchorPane.rightAnchor="25.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
