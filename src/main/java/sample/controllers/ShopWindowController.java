@@ -12,7 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import sample.dataBase.DataBase;
+import sample.repository.dataBase.DataBase;
 import sample.entity.Bill;
 import sample.entity.Product;
 import sample.service.BillService;
@@ -81,6 +81,7 @@ public class ShopWindowController {
         double quantity = Double.parseDouble(spinner.getValue().toString());
         Bill prod = new Bill(Context.getInstance().getUser().getUserId(), selectedItem.getIdProd(), quantity, selectedItem.getNameProd(), (selectedItem.getPrice() * quantity));
         bill.add(prod);
+        spinner.getValueFactory().setValue(1.0);
     }
 
     public void totalLabel() {

@@ -1,7 +1,7 @@
 package sample.service;
 
 import javafx.collections.ObservableList;
-import sample.dataBase.DataBase;
+import sample.repository.dataBase.DataBase;
 import sample.entity.Bill;
 
 import java.util.*;

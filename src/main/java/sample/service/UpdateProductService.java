@@ -1,6 +1,6 @@
 package sample.service;
 
-import sample.dataBase.DataBase;
+import sample.repository.dataBase.DataBase;
 import sample.entity.Product;
 
 import java.sql.SQLException;

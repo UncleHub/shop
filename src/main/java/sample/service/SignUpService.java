@@ -1,7 +1,7 @@
 package sample.service;
 
 
-import sample.dataBase.DataBase;
+import sample.repository.dataBase.DataBase;
 import sample.entity.User;
 import sample.utils.Context;
 

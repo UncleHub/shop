@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import sample.dataBase.DataBase;
+import sample.repository.dataBase.DataBase;
 import sample.entity.Product;
 import sample.service.CreateNewProductService;
 import sample.service.DeleteProdService;

@@ -30,9 +30,9 @@
          </font>
       </Button>
 
-      <Spinner fx:id="spinner" layoutX="690.0" layoutY="387.0" prefHeight="39.0" prefWidth="78.0" editable="true" >
+      <Spinner fx:id="spinner" layoutX="690.0" layoutY="387.0" prefHeight="39.0" prefWidth="90.0" editable="true" >
       <valueFactory>
-         <SpinnerValueFactory.DoubleSpinnerValueFactory min="0.0" max="10000.0" initialValue="1" amountToStepBy="0.1"/>
+         <SpinnerValueFactory.DoubleSpinnerValueFactory min="0.0" max="10000.0" initialValue="1" amountToStepBy="0.10"/>
       </valueFactory>
       </Spinner>
       <Label layoutX="600.0" layoutY="396.0" text="quantity" AnchorPane.bottomAnchor="179.0" AnchorPane.rightAnchor="141.0">

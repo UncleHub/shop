@@ -1,4 +1,4 @@
-package sample.dataBase;
+package sample.repository.dataBase;
 
 
 import javafx.collections.FXCollections;

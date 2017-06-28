@@ -24,9 +24,10 @@ public class BillController {
         lblName.setText("Name: " + Context.getInstance().getUser().getName());
 
         Date date = new Date();
-        lblDate.setText(date.toString());
 
-        lblTotal.setText(Context.getInstance().getTotal().toString());
+        lblDate.setText("Data of order: "+date.toString());
+
+        lblTotal.setText("Total: "+Context.getInstance().getTotal().toString());
 
         listView.setItems(Context.getInstance().getChek());
 

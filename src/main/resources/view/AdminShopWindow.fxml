@@ -20,9 +20,9 @@
       </TableView>
       <TextField fx:id="fldName" layoutX="624.0" layoutY="81.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="80.0" />
       <TextArea fx:id="fldDescr" layoutX="624.0" layoutY="153.0" prefHeight="125.0" prefWidth="149.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="140.0" />
-      <Spinner fx:id="spinner" editable="true" layoutX="687.0" layoutY="287.0" prefHeight="25.0" prefWidth="60.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="270.0">
+      <Spinner fx:id="spinner" editable="true" layoutX="687.0" layoutY="287.0" prefHeight="25.0" prefWidth="90.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="270.0">
          <valueFactory>
-            <SpinnerValueFactory.DoubleSpinnerValueFactory amountToStepBy="0.1" initialValue="1" max="10000.0" min="0.0" />
+            <SpinnerValueFactory.DoubleSpinnerValueFactory amountToStepBy="0.10" initialValue="1" max="10000.0" min="0.0" />
          </valueFactory>
       </Spinner>
       <Button fx:id="btnCreateNewProd" defaultButton="true" layoutX="609.0" layoutY="308.0" mnemonicParsing="false" onAction="#createNewProd" text="Create new product" AnchorPane.bottomAnchor="255.0" AnchorPane.rightAnchor="29.0">
