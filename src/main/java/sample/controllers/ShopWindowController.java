@@ -81,7 +81,6 @@ public class ShopWindowController {
         double quantity = Double.parseDouble(spinner.getValue().toString());
         Bill prod = new Bill(Context.getInstance().getUser().getUserId(), selectedItem.getIdProd(), quantity, selectedItem.getNameProd(), (selectedItem.getPrice() * quantity));
         bill.add(prod);
-        spinner.getValueFactory().setValue(1.0);
     }
 
     public void totalLabel() {
