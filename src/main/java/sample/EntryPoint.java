@@ -25,7 +25,7 @@ public class EntryPoint extends Application {
 
 
     public static void main(String[] args) {
-        DataBase dataBase = new DataBase();
+        DataBase dataBase = DataBase.getInstance();
         try {
             dataBase.createConnection();
         } catch (ClassNotFoundException e) {

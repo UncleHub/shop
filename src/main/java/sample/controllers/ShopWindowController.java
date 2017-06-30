@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -12,49 +11,37 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import sample.repository.dataBase.DataBase;
 import sample.entity.Bill;
 import sample.entity.Product;
 import sample.service.BillService;
-import sample.service.BuyProdService;
+import sample.service.ShopWindowService;
 import sample.utils.Context;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ShopWindowController {
 
-    Stage stage = new Stage();
-    ObservableList<Bill> bill = FXCollections.observableArrayList();
-    @FXML
-    public TableView<Product> tblProduct;
 
-    @FXML
+    ObservableList<Bill> bill = FXCollections.observableArrayList();
+    ShopWindowService shopWindowService = new ShopWindowService();
+
+    public TableView<Product> tblProduct;
     public TableColumn<Product, String> clmProdName;
-    @FXML
     public TableColumn<Product, String> clmProdDesc;
-    @FXML
     public TableColumn<Product, Integer> clmProdId;
-    @FXML
     public TableColumn<Product, Double> clmProdPrice;
 
-    @FXML
     public TableView<Bill> tblBasket;
-    @FXML
     public TableColumn<Bill, String> clmBskProd;
-    @FXML
     public TableColumn<Bill, Double> clmBskQuan;
 
-    @FXML
     public Label lblHello;
-
-    @FXML
     public Label lblTotal;
-
-    @FXML
     public Spinner spinner;
 
-    @FXML
-    public void initialize() {
+
+    public void initialize() throws SQLException {
 
         lblHello.setText("Hello " + Context.getInstance().getUser().getName());
 
@@ -62,7 +49,7 @@ public class ShopWindowController {
         clmProdName.setCellValueFactory(new PropertyValueFactory<Product, String>("nameProd"));
         clmProdDesc.setCellValueFactory(new PropertyValueFactory<Product, String>("descriptionProd"));
         clmProdPrice.setCellValueFactory(new PropertyValueFactory<Product, Double>("price"));
-        tblProduct.setItems(DataBase.setTableProd());
+        tblProduct.setItems(shopWindowService.tableView());
 
         clmBskProd.setCellValueFactory(new PropertyValueFactory<Bill, String>("productName"));
         clmBskQuan.setCellValueFactory(new PropertyValueFactory<Bill, Double>("quantity"));
@@ -93,14 +80,15 @@ public class ShopWindowController {
         Context.getInstance().setTotal(total);
         lblTotal.setText("Total: " + total);
     }
+
     public void removeProdFromBasket(ActionEvent actionEvent) {
         Bill selectedItem = tblBasket.getSelectionModel().getSelectedItem();
         bill.remove(selectedItem);
     }
 
     public void buyProd(ActionEvent actionEvent) throws IOException {
-        BuyProdService buyProdService = new BuyProdService();
-        if (buyProdService.buyProd(bill)){
+
+        if (shopWindowService.buyProd(bill)){
             BillService billService = new BillService();
             Context.getInstance().setChek(billService.setBillList(bill));
             Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("view/Bill.fxml"));

@@ -1,37 +1,26 @@
 package sample.service;
 
-import sample.repository.dataBase.DataBase;
 import sample.entity.User;
+import sample.repository.SqlRequest;
 import sample.utils.Context;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.StringJoiner;
 
 public class LogInService {
-    public boolean register(User user) throws SQLException {
 
-        DataBase dataBase = new DataBase();
+    public boolean logIn(User user) throws SQLException {
 
+        SqlRequest sqlRequest = new SqlRequest();
         String nameOfTable = "user";
+        String columns = "*";
 
         HashMap<String, Object> userMap = new HashMap<>();
         userMap.put("email", user.getEmail());
         userMap.put("password", user.getPassword());
-        Set<Map.Entry<String, Object>> entries = userMap.entrySet();
-        StringJoiner allCondition = new StringJoiner(" AND ");
-        for (Map.Entry<String, Object> oneOfItem : entries) {
-            StringJoiner condition = new StringJoiner("='", "", "'");
-            condition.add(oneOfItem.getKey());
-            condition.add(oneOfItem.getValue().toString());
-            allCondition.add(condition.toString());
-        }
-        String sqlSelect = "SELECT * FROM " + nameOfTable + " WHERE " + allCondition + ";";
 
-        ResultSet select = dataBase.select(sqlSelect);
+        ResultSet select = sqlRequest.selectWithConditions(nameOfTable, columns, userMap);
 
         if (select.next()) {
             Context instance = Context.getInstance();

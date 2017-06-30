@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<?import javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory?>
+<?import javafx.scene.text.*?>
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.ShopWindowController">
    <children>
       <TableView fx:id="tblProduct" layoutX="234.0" layoutY="159.0" prefHeight="480.0" prefWidth="530.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="60.0">
@@ -29,13 +23,12 @@
             <Font size="16.0" />
          </font>
       </Button>
-
       <Spinner fx:id="spinner" layoutX="690.0" layoutY="387.0" prefHeight="39.0" prefWidth="90.0" editable="true" >
-      <valueFactory>
-         <SpinnerValueFactory.DoubleSpinnerValueFactory min="0.0" max="10000.0" initialValue="1" amountToStepBy="0.10"/>
-      </valueFactory>
+         <valueFactory>
+            <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" initialValue="1" max="10000" min="1" />
+         </valueFactory>
       </Spinner>
-      <Label layoutX="600.0" layoutY="396.0" text="quantity" AnchorPane.bottomAnchor="179.0" AnchorPane.rightAnchor="141.0">
+      <Label layoutX="600.0" layoutY="396.0" text="quantity" AnchorPane.bottomAnchor="179.0" AnchorPane.rightAnchor="170.0">
          <font>
             <Font size="16.0" />
          </font>

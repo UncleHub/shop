@@ -1,14 +1,12 @@
 package sample.controllers;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.entity.User;
@@ -20,49 +18,30 @@ import java.sql.SQLException;
 
 public class SignUpController {
 
-    @FXML
     public PasswordField fldPassword;
-    @FXML
     public TextField fldName;
-    @FXML
     public TextField fldEmail;
-    @FXML
     public Label lblError;
 
-    @FXML
-    public Spinner spinner;
-
+    SignUpService signUpService = new SignUpService();
 
     public void ok(ActionEvent actionEvent) throws IOException, SQLException {
+
         User user = new User(fldEmail.getText(), fldPassword.getText(), fldName.getText());
-        SignUpService signUpService = new SignUpService();
+
         if (signUpService.register(user)) {
 
             if ((Context.getInstance().getUser().getEmail()).equals("admin@mail")) {
-                Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("view/AdminShopWindow.fxml"));
-                Scene scene = new Scene(parent);
-                Stage nextStage = ( Stage ) (( Node ) actionEvent.getSource()).getScene().getWindow();
-                nextStage.setScene(scene);
-                nextStage.setTitle("Admin shop window");
-                nextStage.show();
+                setWindow("view/AdminShopWindow.fxml","Admin shop window",actionEvent);
             } else {
-                Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("view/ShopWindow.fxml"));
-                Scene scene = new Scene(parent);
-                Stage nextStage = ( Stage ) (( Node ) actionEvent.getSource()).getScene().getWindow();
-                nextStage.setScene(scene);
-                nextStage.setTitle("Shop window");
-                nextStage.show();
+                setWindow("view/ShopWindow.fxml","Shop window",actionEvent);
             }
         } else lblError.setText("User with this email already exist.");
     }
 
     public void switchWindow(ActionEvent actionEvent) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("view/LogIn.fxml"));
-        Scene scene = new Scene(parent);
-        Stage nextStage = ( Stage ) (( Node ) actionEvent.getSource()).getScene().getWindow();
-        nextStage.setScene(scene);
-        nextStage.setTitle("Log in username");
-        nextStage.show();
+
+        setWindow("view/LogIn.fxml","Log in username",actionEvent);
     }
 
     public void closeWindow(ActionEvent actionEvent) {
@@ -70,5 +49,13 @@ public class SignUpController {
         Scene scene = source.getScene();
         Stage window = ( Stage ) scene.getWindow();
         window.close();
+    }
+    private void setWindow(String name, String title, ActionEvent actionEvent) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource(name));
+        Scene scene = new Scene(parent);
+        Stage nextStage = ( Stage ) (( Node ) actionEvent.getSource()).getScene().getWindow();
+        nextStage.setScene(scene);
+        nextStage.setTitle(title);
+        nextStage.show();
     }
 }
