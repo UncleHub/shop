@@ -63,14 +63,14 @@ public class AdminShopWindowController {
         Integer idProd = selectedItem.getIdProd();
         adminShopWindowService.updateProd(selectedItem, idProd);
         products.add(selectedItem);
-        refreshTable();
+
     }
 
     public void deleteProd(ActionEvent actionEvent) throws SQLException {
         Product selectedItem = tblProd.getSelectionModel().getSelectedItem();
         adminShopWindowService.deleteProd(selectedItem);
         products.remove(selectedItem);
-        refreshTable();
+
     }
 
     public void createNewProd(ActionEvent actionEvent) throws SQLException {
@@ -85,13 +85,9 @@ public class AdminShopWindowController {
                 lblError.setText("");
                 fldName.clear();
                 fldDescr.clear();
-                refreshTable();
+
             }else lblError.setText("newInsert product null");
         } else lblError.setText("One of the fields is empty.");
     }
 
-    public void refreshTable() {
-        tblProd.getItems().removeAll();
-        tblProd.setItems(products);
-    }
 }
