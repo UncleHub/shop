@@ -8,12 +8,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import sample.entity.Bill;
 import sample.entity.Product;
-import sample.service.BillService;
 import sample.service.ShopWindowService;
 import sample.utils.Context;
 
@@ -75,7 +77,7 @@ public class ShopWindowController {
         double total = 0.0;
         for (Bill bill1 : bill) {
             total = total + bill1.getTotal();
-            total = (double)(Math.round(total*100))/100;
+            total = ( double ) (Math.round(total * 100)) / 100;
         }
         Context.getInstance().setTotal(total);
         lblTotal.setText("Total: " + total);
@@ -88,16 +90,15 @@ public class ShopWindowController {
 
     public void buyProd(ActionEvent actionEvent) throws IOException {
 
-        if (shopWindowService.buyProd(bill)){
-            BillService billService = new BillService();
-            Context.getInstance().setChek(billService.setBillList(bill));
-            Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("view/Bill.fxml"));
-            Scene scene = new Scene(parent);
-            Stage nextStage = ( Stage ) (( Node ) actionEvent.getSource()).getScene().getWindow();
-            nextStage.setScene(scene);
-            nextStage.setTitle("Bill");
-            nextStage.show();
-        }
+        shopWindowService.buyProd(bill);
+        Context.getInstance().setChek(shopWindowService.setBillList(bill));
+        Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("view/Bill.fxml"));
+        Scene scene = new Scene(parent);
+        Stage nextStage = ( Stage ) (( Node ) actionEvent.getSource()).getScene().getWindow();
+        nextStage.setScene(scene);
+        nextStage.setTitle("Bill");
+        nextStage.show();
+
     }
 
     public void closeWindow(ActionEvent actionEvent) {

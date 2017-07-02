@@ -40,8 +40,8 @@ public class AdminShopWindowService {
     public Product createNewProd(Product product) throws SQLException {
         Date date = new Date();
         String tableName = "product";
-        Product newProduct = null;
-        String columns= "*";
+        Product newProduct = product;
+        String columns = "*";
         HashMap<String, Object> productMap = new HashMap<>();
         productMap.put("nameProduct", product.getNameProd());
         productMap.put("description", product.getDescriptionProd());
@@ -49,16 +49,15 @@ public class AdminShopWindowService {
         productMap.put("userId", Context.getInstance().getUser().getUserId());
         productMap.put("dataOfCreation", date.toString());
 
-        if(sqlRequest.insert(tableName, productMap)){
+        if (sqlRequest.insert(tableName, productMap)) {
 
             ResultSet resultSet = sqlRequest.selectWithConditions(tableName, columns, productMap);
-            int productId = resultSet.getInt(1);
-            String productName = resultSet.getString(2);
-            String productDescription = resultSet.getString(3);
-            double productPrice = resultSet.getDouble(4);
-            newProduct = new Product(productName, productDescription, productPrice, productId);
+            newProduct.setIdProd(resultSet.getInt("idProduct"));
+                       
+            return newProduct;
+        } else {
+            return newProduct;
         }
-        return newProduct;
     }
 
     public ArrayList<Product> tableView() throws SQLException {

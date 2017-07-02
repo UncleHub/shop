@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.StringJoiner;
 
 public class ShopWindowService {
 
@@ -32,7 +33,7 @@ public class ShopWindowService {
 
             return sqlRequest.insert(tableName, billMap);
         }
-        return false;
+        return true;
     }
 
     public ObservableList<Product> tableView() throws SQLException {
@@ -48,5 +49,15 @@ public class ShopWindowService {
             products.add(product);
         }
         return products;
+    }
+
+    public ObservableList<String> setBillList(ObservableList<Bill> bill) {
+        ObservableList<String> chek = FXCollections.observableArrayList();
+        for (Bill bill1 : bill) {
+            StringJoiner rows = new StringJoiner("\t");
+            rows.add(bill1.getProductName()).add((bill1.getQuantity() + " * " + bill1.getTotal() / bill1.getQuantity())).add("= " + bill1.getTotal());
+            chek.add(rows.toString());
+        }
+        return chek;
     }
 }

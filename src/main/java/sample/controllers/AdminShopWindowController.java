@@ -1,7 +1,6 @@
 package sample.controllers;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -33,18 +32,12 @@ public class AdminShopWindowController {
     ObservableList<Product> products = FXCollections.observableArrayList();
 
 
-
     public void initialize() throws SQLException {
         clmProdId.setCellValueFactory(new PropertyValueFactory<Product, Integer>("idProd"));
         clmProdName.setCellValueFactory(new PropertyValueFactory<Product, String>("nameProd"));
         clmProdDesc.setCellValueFactory(new PropertyValueFactory<Product, String>("descriptionProd"));
         clmProdPrice.setCellValueFactory(new PropertyValueFactory<Product, Double>("price"));
         tblProd.setEditable(true);
-        products.addListener(new ListChangeListener<Product>() {
-            public void onChanged(Change<? extends Product> c) {
-                refreshTable();
-            }
-        });
         products.addAll(adminShopWindowService.tableView());
         tblProd.setItems(products);
     }
@@ -71,14 +64,14 @@ public class AdminShopWindowController {
         Integer idProd = selectedItem.getIdProd();
         adminShopWindowService.updateProd(selectedItem, idProd);
         products.add(selectedItem);
+        refreshTable();
     }
 
     public void deleteProd(ActionEvent actionEvent) throws SQLException {
         Product selectedItem = tblProd.getSelectionModel().getSelectedItem();
-        if (adminShopWindowService.deleteProd(selectedItem)) {
-            products.remove(selectedItem);
-            tblProd.refresh();
-        }
+        adminShopWindowService.deleteProd(selectedItem);
+        products.remove(selectedItem);
+        refreshTable();
     }
 
     public void createNewProd(ActionEvent actionEvent) throws SQLException {
@@ -88,20 +81,16 @@ public class AdminShopWindowController {
             Product newProduct = new Product(fldName.getText(), fldDescr.getText(), Double.parseDouble(spinner.getValue().toString()));
 
             Product newInsertProd = adminShopWindowService.createNewProd(newProduct);
+            products.add(newInsertProd);
+            lblError.setText("");
+            fldName.clear();
+            fldDescr.clear();
+            refreshTable();
 
-            if (newInsertProd != null) {
-                products.add(newInsertProd);
-                tblProd.refresh();
-                lblError.setText("");
-                fldName.clear();
-                fldDescr.clear();
-                spinner.getValueFactory().setValue("1.0");
-            }
         } else lblError.setText("One of the fields is empty.");
     }
 
-
-    public void refreshTable(){
+    public void refreshTable() {
         tblProd.getItems().removeAll();
         tblProd.setItems(products);
     }
