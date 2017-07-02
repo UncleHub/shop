@@ -28,19 +28,16 @@ public class AdminShopWindowService {
     public boolean deleteProd(Product product) {
         String tableName = "product";
         SqlRequest sqlRequest = new SqlRequest();
-
         HashMap<String, Object> productMap = new HashMap();
         productMap.put("nameProduct", product.getNameProd());
         productMap.put("description", product.getDescriptionProd());
         productMap.put("price", product.getPrice());
-
         return sqlRequest.delete(tableName, productMap);
     }
 
     public Product createNewProd(Product product) throws SQLException {
         Date date = new Date();
         String tableName = "product";
-        Product newProduct = product;
         String columns = "*";
         HashMap<String, Object> productMap = new HashMap<>();
         productMap.put("nameProduct", product.getNameProd());
@@ -49,15 +46,14 @@ public class AdminShopWindowService {
         productMap.put("userId", Context.getInstance().getUser().getUserId());
         productMap.put("dataOfCreation", date.toString());
 
-        if (sqlRequest.insert(tableName, productMap)) {
+        sqlRequest.insert(tableName, productMap);
+        ResultSet resultSet = sqlRequest.selectWithConditions(tableName, columns, productMap);
+        int idProduct = resultSet.getInt("idProduct");
+        String nameProduct = resultSet.getString("nameProduct");
+        String description = resultSet.getString("description");
+        double price = resultSet.getDouble("price");
+        return new Product(nameProduct, description, price, idProduct);
 
-            ResultSet resultSet = sqlRequest.selectWithConditions(tableName, columns, productMap);
-            newProduct.setIdProd(resultSet.getInt("idProduct"));
-                       
-            return newProduct;
-        } else {
-            return newProduct;
-        }
     }
 
     public ArrayList<Product> tableView() throws SQLException {

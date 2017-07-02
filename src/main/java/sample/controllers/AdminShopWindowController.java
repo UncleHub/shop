@@ -37,7 +37,6 @@ public class AdminShopWindowController {
         clmProdName.setCellValueFactory(new PropertyValueFactory<Product, String>("nameProd"));
         clmProdDesc.setCellValueFactory(new PropertyValueFactory<Product, String>("descriptionProd"));
         clmProdPrice.setCellValueFactory(new PropertyValueFactory<Product, Double>("price"));
-        tblProd.setEditable(true);
         products.addAll(adminShopWindowService.tableView());
         tblProd.setItems(products);
     }
@@ -81,12 +80,13 @@ public class AdminShopWindowController {
             Product newProduct = new Product(fldName.getText(), fldDescr.getText(), Double.parseDouble(spinner.getValue().toString()));
 
             Product newInsertProd = adminShopWindowService.createNewProd(newProduct);
-            products.add(newInsertProd);
-            lblError.setText("");
-            fldName.clear();
-            fldDescr.clear();
-            refreshTable();
-
+            if (newInsertProd!=null) {
+                products.add(newInsertProd);
+                lblError.setText("");
+                fldName.clear();
+                fldDescr.clear();
+                refreshTable();
+            }else lblError.setText("newInsert product null");
         } else lblError.setText("One of the fields is empty.");
     }
 
